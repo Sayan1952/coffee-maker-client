@@ -1,19 +1,28 @@
 import { useLoaderData } from "react-router-dom";
 import "./App.css";
 import CoffeeCard from "./components/CoffeeCard";
+import { useState } from "react";
 
 function App() {
-  const coffees = useLoaderData();
+  const loadedCoffees = useLoaderData();
+  const [coffees, setCoffees] = useState(loadedCoffees);
 
   return (
-    <>
-      <h1>Vite + React</h1>
-
-      <h1> Hot coffee {coffees.length}</h1>
-      {coffees.map((coffee) => (
-        <CoffeeCard key={coffee._id} coffee={coffee}></CoffeeCard>
-      ))}
-    </>
+    <div className="m-20">
+      <h1 className="text-center text-3xl m-5 font-semibold">
+        Our Popular Products
+      </h1>
+      <div className="grid md:grid-cols-2 gap-4">
+        {coffees.map((coffee) => (
+          <CoffeeCard
+            key={coffee._id}
+            coffee={coffee}
+            coffees={coffees}
+            setCoffees={setCoffees}
+          ></CoffeeCard>
+        ))}
+      </div>
+    </div>
   );
 }
 
